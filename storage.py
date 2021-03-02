@@ -84,8 +84,7 @@ class Storage(dict):
 			search_shop = list(search.keys())[self.FIRST_INDEX]
 
 			if search_shop == shop:
-				index = area_list.index(search)
-				return index            
+				return area_list.index(search)            
 	
 	def add_area(self, area):
 
@@ -95,8 +94,7 @@ class Storage(dict):
 	def add_shop(self, area, shop, balance = 0):
 
 		area_list = self[area]
-		tmp = {}
-		tmp[shop] = [{"Balance":balance}]
+		tmp = {shop: [{"Balance":balance}]}
 		area_list.append(tmp)
 		self[area] = area_list
 
@@ -104,8 +102,7 @@ class Storage(dict):
 
 		index = self.get_index(area, shop)
 		shop_list = self[area][index][shop]
-		tmp = {}
-		tmp[product] = price
+		tmp = {product: price}
 		shop_list.append(tmp)
 		self[area][index][shop] = shop_list
 
@@ -135,25 +132,22 @@ class Storage(dict):
 
 	def get_all_area(self):
 
-		all_area = list(self.keys())
-		return all_area
+		return list(self.keys())
 
 	def get_all_shop(self):
 
 		all_area = self.get_all_area()
-		all_shop = [f"{area} - {list(shop.keys())[self.FIRST_INDEX]}" 
+		return [f"{area} - {list(shop.keys())[self.FIRST_INDEX]}" 
 					for area in all_area 
 					for shop in self[area]
 				   ]
-		return all_shop
 
 
 	def get_area_shop(self, area):
 
-		area_shops = [f"{list(shop.keys())[self.FIRST_INDEX]}" 
+		return [f"{list(shop.keys())[self.FIRST_INDEX]}" 
 					  for shop in self[area]
 				     ]
-		return area_shops
 
 
 	def get_all_product(self):pass #product list file
@@ -162,11 +156,10 @@ class Storage(dict):
 	def get_shop_product(self, area, shop):
 		
 		shop_index = self.get_index(area, shop)
-		shop_products = [(list(product.keys())[0],list(product.values())[0])
+		return [(list(product.keys())[0],list(product.values())[0])
 						 for product in self[area][shop_index][shop]
 						 if list(product.keys())[0] != "Balance"
 						]
-		return shop_products
 
 
 
