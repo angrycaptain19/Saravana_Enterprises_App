@@ -162,7 +162,7 @@ class BillingApp(MDApp):
 
 	def get_shop_details(self, inst):
 		try:
-			if not self.shop_dialog.content_cls.children[2].text == "": 
+			if self.shop_dialog.content_cls.children[2].text != "": 
 				self.shop_name = self.shop_dialog.content_cls.children[2].text
 				self.shop_balance = self.shop_dialog.content_cls.children[1].text
 				print(self.current_area,self.shop_name,self.shop_balance)
@@ -170,7 +170,7 @@ class BillingApp(MDApp):
 				self.shop_dialog.content_cls.children[1].text = "0"
 				self.shop_dialog.content_cls.children[0].text = "+91"
 				self.shop_dialog.dismiss()
-			
+
 		except Exception as e:
 			print(e)
 			self.shop_dialog.dismiss()
